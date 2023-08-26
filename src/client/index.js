@@ -1,5 +1,7 @@
-import("./views/public/style.scss")
-import { handleSubmit } from "./views/js/handleSubmit"
+import { checkForName } from './js/nameChecker'
+import { handleSubmit } from './js/formHandler'
 
+console.log(checkForName);
 
-export { handleSubmit }
+alert("I EXIST")
+console.log("CHANGE!!");

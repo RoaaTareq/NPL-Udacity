@@ -1,33 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Test</title>
+        <link rel="stylesheet" href="/styles/resets.css">
+        <link rel="stylesheet" href="/styles/base.css">
+        <link rel="stylesheet" href="/styles/header.css">
+        <link rel="stylesheet" href="/styles/form.css">
+        <link rel="stylesheet" href="/styles/footer.css">
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test-webpack</title>
-</head>
+    <body>
 
-<body>
-    <div class="container">
-        <form id="myForm" method="post" onsubmit="return Client.handleSubmit(event)">
-            <label for="URI">Enter an Article URL:</label>
-            <input type="text" id="URI" name="URI" />
-            <button type="submit" value="Analyze">Analyze</button>
-        </form>
-    </div>
-    <div id="error" style="display: none;"></div>
-    <div id="results">
-        <h2>Results:</h2>
-        <div id="loader" style="display: none;"></div>
+        <header>
+            <div class="">
+                Logo
+            </div>
+            <div class="">
+                navigation
+            </div>
+        </header>
 
-        <ul id="resultsList">
-            <li id="agreement"></li>
-            <li id="subjectivity"></li>
-            <li id="confidence"></li>
-            <li id="irony"></li>
-            <li id="score_tag"></li>
-        </ul>
-    </div>
-</body>
+        <main>
+            <section>
+                <form class="" onsubmit="return handleSubmit(event)">
+                    <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name">
+                    <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
+                </form>
+            </section>
 
+            <section>
+                <strong>Form Results:</strong>
+                <div id="results"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>This is a footer</p>
+        </footer>
+
+    </body>
 </html>
