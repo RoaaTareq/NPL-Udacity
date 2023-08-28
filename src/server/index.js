@@ -1,64 +1,102 @@
-const dotenv = require('dotenv');
-dotenv.config();
+
+//settings and initializations
+//1- setup the enviromental variables
+const dotenv = require('dotenv')
+dotenv.config({
+    path: `${__dirname}/src/.env`
+  })
+
+// Setup an empty JS object to act as endpoint for all routes in my project
+allprojectData = {}
 
 var path = require('path')
-const express = require('express')
-const bodyParser = require('body-parser')
-const fetch = require('node-fetch');
-const mockAPIResponse = require('./mockAPI.js')
 
-// Start up an instance of app
+//Setup express
+const express = require('express')
+
 const app = express()
 
-// Cors allows the browser and server to communicate without any security interruptions
-const cors = require('cors');
 
-app.use(cors());
+console.log(__dirname) //for test
+console.log("Rouaa API key is",process.env.APIkey) //for test
+
+/* Middleware*/
+//Here we are configuring express to use body-parser as middle-ware.
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json());
+
+// Cors for cross origin allowance
+const cors = require('cors')
+app.use(cors())
+
+// Initialize the main project folder (dist)
 app.use(express.static('dist'))
 
-console.log(__dirname)
+//End Initializations
 
-// API
-const baseURL = 'https://api.meaningcloud.com/sentiment-2.1?'
-const apiKey = process.env.API_KEY
-console.log(`Your API Key is ${process.env.API_KEY}`);
-let userInput = [] // const does not work
-
+//get request 
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
-    //res.sendFile(path.resolve('src/client/views/index.html'))
+   
 })
 
-app.get('/test', function (req, res) {
-    res.send(mockAPIResponse)
+// designates what port the server will listen to for incoming requests
+app.listen(8081, function () {
+    console.log('listening on port 8081!')
 })
 
-// POST Route
-app.post('/api', async function(req, res) {
-    userInput = req.body.url;
-    console.log(`You entered: ${userInput}`);
-    const apiURL = `${baseURL}key=${apiKey}&url=${userInput}&lang=en`
+//  *****************************   Rou start server *****************************************
 
-    const response = await fetch(apiURL)
-    const mcData = await response.json()
-    console.log(mcData)
-    res.send(mcData)
-    /** server sends only specified data to the client with below codes
-     * const projectData = {
-     *  score_tag : mcData.score_tag,
-     *  agreement : mcData.agreement,
-     *  subjectivity : mcData.subjectivity,
-     *  confidence : mcData.confidence,
-     *  irony : mcData.irony
-     * }
-     * res.send(projectData);
-     * */
-})
+//make routes
 
-// designates what port the app will listen to for incoming requests
-app.listen(8080, function () {
-    console.log('Example app listening on port 8080!')
-})
+//get route
+
+/**
+ * @description Defines a GET route that sends the data from the 'projectData' endpoint as the server response.
+ * @param {string} '/all' - The URL of the GET route.
+ * @param {function} anonymous - The function with request and response parameters.
+ */
+
+app.get('/all-data',function(req,res){
+    
+   console.log('model ' + allprojectData.model + ' score_tag:' + allprojectData.score_tag + ' agreement:' + allprojectData.agreement)
+    res.send(allprojectData)
+  })
+  
+  //post route
+  
+  /**
+ * @description Defines a POST route that receives data and populates the 'projectData' endpoint as the server response.
+ *              Additionally, it logs the endpoint data to the console (terminal) for testing purposes.
+ * @param {string} '/addData' - The URL of the POST route.
+ * @param {function} addArticleData - The function with request and response parameters that populates the 'projectData' endpoint with the received data.
+ */
+
+  app.post('/addData', addArticleData)
+  
+ /**
+ * @description Populates the 'projectData' endpoint with the received data (model, score_tag, agreement, subjectivity, confidence, irony)
+ *              and sends the 'projectData' endpoint to the client.
+ * @param {object} req - The request object.
+ * @param {object} res - The response object.
+ */
+
+  function addArticleData(req, res){
+   
+    console.log('from server: request :' + req.body)
+  
+    allprojectData.model=req.body.model;
+    allprojectData.score_tag=req.body.score_tag;
+    allprojectData.agreement=req.body.agreement;
+
+    allprojectData.subjectivity=req.body.subjectivity;
+    allprojectData.confidence=req.body.confidence;
+    allprojectData.irony=req.body.irony;
+ 
+    res.send(allprojectData)
+    console.log('This is server - projectData' + allprojectData)//for test s
+    
+  } 
+  
+//********************************   Rou END SERVER ******************************************* */

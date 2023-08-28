@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Test</title>
+      
+    </head>
+
+    <body>
+
+        <header>
+            <div class="logo">
+                <!-- <img src="../images/sent_analysis.jpg" alt="sentimental analysis"> -->
+                Sentimental NLP 
+            </div>
+            
+        <main>
+            <section>
+                <form class="" onsubmit="return MyClient.handleSubmit(event)">
+                    <div class="labels">
+                        <strong>Please enter the article URL</strong> 
+                    </div>
+                    <input id="myURL" type="text" name="input" value="" placeholder="URL">
+                    <input type="submit" id ="btnSubmit" name="btn" value="submit" onclick="return MyClient.handleSubmit(event)" onsubmit="return MyClient.handleSubmit(event)">
+                </form>
+            </section>
+
+            <section>
+                <div class="labels">
+                <strong>Article Processing Results:</strong>
+                </div>
+                <div id="results"></div>
+                <div id="model"></div>
+                <div id="score_tag"></div>
+                <div id="agreement"></div>
+                <div id="subjectivity"></div>
+                <div id="confidence"></div>
+                <div id="irony"></div>
+                                   
+            </section>
+        </main>
+
+        <footer>
+            <p>This website is a sample of NLP of sentiments processing done by Rouwaida Mourad</p>
+            <div> 
+                copyright 2021, all rights reserved
+            </div>
+
+        </footer>
+
+        <!-- <script>
+            // Check that service workers are supported
+            if ('serviceWorker' in navigator) {
+                // Use the window load event to keep the page load performant
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js');
+                });
+            }
+           </script> -->
+    </body>
+</html>
