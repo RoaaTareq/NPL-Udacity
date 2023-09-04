@@ -1,17 +1,22 @@
-// Import MyClient if needed
-// import MyClient from './MyClient'; // Assuming MyClient is in a separate module
+
 
 function handleSubmit(event) {
-  event.preventDefault();
-
-  const formText = document.getElementById('myURL').value;
- 
-
-  const urlCheckerResult = MyClient.checkForRightURL(formText);
-
-
-  document.getElementById('btnSubmit').addEventListener('click', ArticleData);
-}
+    event.preventDefault();
+    
+    const inputElement = document.getElementById("myURL");
+     // Retrieve the value from the input element
+    const inputValue = inputElement.value;
+    const urlCheckerResult = MyClient.checkForRightURL(inputValue);
+    // Get reference to the form element
+  const formElement = document.getElementById("btnSubmit");
+  
+  // Add a submit event listener to the form
+  formElement.addEventListener("click", ArticleData);
+  
+        
+  }
+  
+  
 
 function ArticleData() {
   const inputforUserURL = document.getElementById('myURL').value;
@@ -28,6 +33,8 @@ function ArticleData() {
       getallArticleData(meaningCloudUrl, urlToSend, myAPIKeyToSend)
           .then(data => {
               postData('http://localhost:8081/addData', {
+        // This is a placeholder function, you would replace it with your actual analysis logic using  any other method.
+      
                   model: data.model,
                   score_tag: data.score_tag,
                   agreement: data.agreement,
@@ -70,15 +77,14 @@ async function postData(url, data = {}) {
 async function updateMyformUI() {
   try {
       const myRequest = await fetch('http://localhost:8081/all-data');
-      const myReturnedData = await myRequest.json();
-
-      document.getElementById('model').innerHTML = 'Model: ' + myReturnedData.model;
-      document.getElementById('score_tag').innerHTML = 'Score Tag: ' + myReturnedData.score_tag;
-      document.getElementById('agreement').innerHTML = 'Agreement: ' + myReturnedData.agreement;
-
-      document.getElementById('subjectivity').innerHTML = 'Subjectivity: ' + myReturnedData.subjectivity;
-      document.getElementById('confidence').innerHTML = 'Confidence: ' + myReturnedData.confidence;
-      document.getElementById('irony').innerHTML = 'Irony: ' + myReturnedData.irony;
+      const analysisData = await myRequest.json();
+// Display the analysisData in respective divs
+      document.getElementById("model").textContent = "Model: " + analysisData.model;
+      document.getElementById("score_tag").textContent = "Score Tag: " + analysisData.score_tag;
+      document.getElementById("agreement").textContent = "Agreement: " + analysisData.agreement;
+      document.getElementById("subjectivity").textContent = "Subjectivity: " + analysisData.subjectivity;
+      document.getElementById("confidence").textContent = "Confidence: " + analysisData.confidence;
+      document.getElementById("irony").textContent = "Irony: " + analysisData.irony;
   } catch (err) {
       console.log(err);
   }

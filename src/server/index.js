@@ -17,9 +17,6 @@ const express = require('express')
 const app = express()
 
 
-console.log(__dirname) //for test
-console.log("Rouaa API key is",process.env.APIkey) //for test
-
 /* Middleware*/
 //Here we are configuring express to use body-parser as middle-ware.
 const bodyParser = require('body-parser')

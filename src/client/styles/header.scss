@@ -1,12 +1,12 @@
 header {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 20px;
+  
     .logo {
-        width: 60;
-        height: 20px;
-        font-weight:100;
-        background-color: darkorange;
+        font-size: 32px;
+    text-align: center;
+    font-weight: 900;
+    color: orange;
+    background: #0f788e;
+    padding: 20px;
     }
 }
 

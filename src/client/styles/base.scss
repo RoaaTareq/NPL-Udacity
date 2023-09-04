@@ -7,11 +7,42 @@ body {
 main {
     flex: 2;
     .labels{
-        background-color: darkgrey;
+        background: #0f788e;
+        padding: 20px;
+        margin-bottom: 12px;
+        color: orange;
+        font-size: 19px;
+        border-top-left-radius: 12px;
+        border:6px solid orange
+    }
+   #myURL{
+   padding: 12px;
+    width: 500px;
+    border: 2px solid orange;
+    border-radius: 6px;
+    }
+   #btnSubmit {
+        padding: 12px;
+    width: 250px;
+    border: 2px solid orange;
+    border-radius: 6px;
+    font-size: 18px;
+    color: #fff;
+    background: orange;
+    cursor: pointer;
     }
 }
 
 section {
     max-width: 800px;
     margin: 50px auto;
+}
+#model,#score_tag,#agreement,#subjectivity,#confidence,#irony{
+    color:orange;
+    font-size: 12px;
+    margin: 12px 0;
+    font-weight: 900;
+
+
+    
 }

@@ -32,7 +32,17 @@ The project taps into the capabilities of the Meaning Cloud API to facilitate th
 
 * An API key is registered within the .env file—no further credentials are necessary.
 * It's worth noting that the API offers free access for up to 1000 daily requests.
+ ## explain  code and resource
+ * check url 
+  - https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
+  - chatgpt
+  - https://www.freecodecamp.org/news/check-if-a-javascript-string-is-a-url/#:~:text=checkValidity()%20method%20is%20used,is%20not%20a%20proper%20URL.
+  * handelsubmit 
+  - w3school
+  - third section from course I studied intgration API
 
+  *I have exprince on coding
+  
 ## Enriching Features
 
 Beyond its core functionality, the project boasts additional compelling features:

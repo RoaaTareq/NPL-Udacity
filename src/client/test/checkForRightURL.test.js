@@ -1,7 +1,13 @@
-const { checkForRightURL } = require('../js/checkForRightURL');
+const { checkForRightURL } = require('../js/checkForRightURL.js');
 
-test('check if the entered url is right and valid or not', () => {
-    expect(checkForRightURL('hello')).toBeFalsy();
-    expect(checkForRightURL('https://en.wikipedia.org/wiki/Margaret_Hamilton_(software_engineer)')).toBeTruthy();
-    expect(checkForRightURL('https://en.wikipedia.org/wiki/Naguib_Mahfouz')).toBeTruthy();
-});
+describe('checkForRightURL', () => {
+    it('should return true for a valid URL', () => {
+      const validURL = 'https://ar.airbnb.com/?_set_bev_on_new_domain=1693763715_NTFkZjE1ZTg0MGNj';
+      expect(checkForRightURL(validURL)).toBe(true);
+    });
+  
+    it('should return false for an invalid URL', () => {
+      const invalidURL = 'not_a_valid_url';
+      expect(checkForRightURL(invalidURL)).toBe(false);
+    });
+  });
