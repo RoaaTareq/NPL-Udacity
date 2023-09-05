@@ -1,29 +1,34 @@
+import { handleSubmit } from '../js/handleSubmit'; // Replace 'yourModule' with the actual path to your module
 
-import '@babel/polyfill'
-
-const { handleSubmit } = require('../js/handleSubmit');
-global.document = {
-  getElementById: jest.fn(id => ({
-    value: 'https://www.example.com', // Mock a valid URL
-  })),
+// Mock the necessary functions and objects
+const mockEvent = {
+  preventDefault: jest.fn(),
+  target: {
+    elements: {
+      myURL: {
+        value: 'https://example.com', // Replace with a test URL
+      },
+    },
+  },
 };
 
-describe('handleSubmit', () => {
-  it('should handle a valid URL submission', () => {
-    const event = {
-      preventDefault: jest.fn(),
-    };
-    
-    handleSubmit(event);
+// Mock the fetch function
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({ /* Mock response data here */ }),
+  })
+);
 
-    // You can assert expectations here based on the behavior of your code
-    // For example, you can check if certain functions were called or if a specific alert was shown.
+describe('handleSubmit', () => {
+  beforeEach(() => {
+    jest.clearAllMocks(); // Clear mock function calls before each test
   });
 
-  // Add more test cases for different scenarios, like invalid URL submission or other behavior.
+  it('should call preventDefault and fetch data when form is submitted with a valid URL', async () => {
+    // Add more test cases here
+  });
+
+  it('should show an alert when form is submitted with an invalid URL', async () => {
+    // Add test case for invalid URL here
+  });
 });
-
-
-
-
-

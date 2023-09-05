@@ -1,99 +1,48 @@
+// Import required modules and initialize environment variables
+const dotenv = require('dotenv');
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-//settings and initializations
-//1- setup the enviromental variables
-const dotenv = require('dotenv')
 dotenv.config({
-    path: `${__dirname}/src/.env`
-  })
+  path: `${__dirname}/src/.env`,
+});
 
-// Setup an empty JS object to act as endpoint for all routes in my project
-allprojectData = {}
+// Setup Express
+const app = express();
+const port = 8081;
 
-var path = require('path')
+// Middleware setup
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 
-//Setup express
-const express = require('express')
+// Serve static files from the 'dist' folder
+app.use(express.static('dist'));
 
-const app = express()
+// Initialize project data object
+const allprojectData = {};
 
+// Define a GET route for the homepage
+app.get('/', (req, res) => {
+  res.sendFile('dist/index.html');
+});
 
-/* Middleware*/
-//Here we are configuring express to use body-parser as middle-ware.
-const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+// Define a GET route to send project data
+app.get('/all-data', (req, res) => {
+  console.log(`Model: ${allprojectData.model}, Score Tag: ${allprojectData.score_tag}, Agreement: ${allprojectData.agreement}`);
+  res.send(allprojectData);
+});
 
-// Cors for cross origin allowance
-const cors = require('cors')
-app.use(cors())
+// Define a POST route to add data
+app.post('/addData', (req, res) => {
+  console.log('Received data from client:', req.body);
+  Object.assign(allprojectData, req.body); // Update projectData with received data
+  res.send(allprojectData);
+  console.log('Updated projectData:', allprojectData); // For testing purposes
+});
 
-// Initialize the main project folder (dist)
-app.use(express.static('dist'))
-
-//End Initializations
-
-//get request 
-app.get('/', function (req, res) {
-    res.sendFile('dist/index.html')
-   
-})
-
-// designates what port the server will listen to for incoming requests
-app.listen(8081, function () {
-    console.log('listening on port 8081!')
-})
-
-//  *****************************   Rou start server *****************************************
-
-//make routes
-
-//get route
-
-/**
- * @description Defines a GET route that sends the data from the 'projectData' endpoint as the server response.
- * @param {string} '/all' - The URL of the GET route.
- * @param {function} anonymous - The function with request and response parameters.
- */
-
-app.get('/all-data',function(req,res){
-    
-   console.log('model ' + allprojectData.model + ' score_tag:' + allprojectData.score_tag + ' agreement:' + allprojectData.agreement)
-    res.send(allprojectData)
-  })
-  
-  //post route
-  
-  /**
- * @description Defines a POST route that receives data and populates the 'projectData' endpoint as the server response.
- *              Additionally, it logs the endpoint data to the console (terminal) for testing purposes.
- * @param {string} '/addData' - The URL of the POST route.
- * @param {function} addArticleData - The function with request and response parameters that populates the 'projectData' endpoint with the received data.
- */
-
-  app.post('/addData', addArticleData)
-  
- /**
- * @description Populates the 'projectData' endpoint with the received data (model, score_tag, agreement, subjectivity, confidence, irony)
- *              and sends the 'projectData' endpoint to the client.
- * @param {object} req - The request object.
- * @param {object} res - The response object.
- */
-
-  function addArticleData(req, res){
-   
-    console.log('from server: request :' + req.body)
-  
-    allprojectData.model=req.body.model;
-    allprojectData.score_tag=req.body.score_tag;
-    allprojectData.agreement=req.body.agreement;
-
-    allprojectData.subjectivity=req.body.subjectivity;
-    allprojectData.confidence=req.body.confidence;
-    allprojectData.irony=req.body.irony;
- 
-    res.send(allprojectData)
-    console.log('This is server - projectData' + allprojectData)//for test s
-    
-  } 
-  
-//********************************   Rou END SERVER ******************************************* */
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});

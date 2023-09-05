@@ -1,4 +1,5 @@
 
+// import MyClient from './checkForRightURL'; // Assuming MyClient is defined in a separate module
 
 function handleSubmit(event) {
     event.preventDefault();
@@ -7,6 +8,7 @@ function handleSubmit(event) {
      // Retrieve the value from the input element
     const inputValue = inputElement.value;
     const urlCheckerResult = MyClient.checkForRightURL(inputValue);
+    console.log(urlCheckerResult)
     // Get reference to the form element
   const formElement = document.getElementById("btnSubmit");
   
