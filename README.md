@@ -42,6 +42,13 @@ The project taps into the capabilities of the Meaning Cloud API to facilitate th
   - third section from course I studied intgration API
 
   *I have exprince on coding
+  -Resources:
+   1. https://gist.github.com/franciskim/41a959f8e3989254ef5d
+    2. https://www.tutorialspoint.com/How-to-validate-URL-address-in-JavaScript
+    3. https://www.w3resource.com/javascript-exercises/javascript-regexp-exercise-9.php
+    4. https://www.codegrepper.com/code-examples/javascript/javascript+validate+url
+    5. https://stackoverflow.com/a/5717133/6483379
+    6. https://www.npmjs.com/package/valid-url
   
 ## Enriching Features
 
@@ -54,3 +61,6 @@ Beyond its core functionality, the project boasts additional compelling features
 ## About the Author
 
 My name is Roaa, and I am the proud author of this project. As a dedicated student enrolled in the Jordan initiative, I've undertaken the creation of this endeavor to harness the power of NLP for article evaluation.
+
+
+![test](./images/test.png)
